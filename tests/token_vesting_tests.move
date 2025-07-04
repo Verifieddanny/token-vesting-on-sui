@@ -107,8 +107,11 @@ fun test_mint_total_amount() {
         let mut events = event::events_by_type<Minted>();
         // debug::print(&events);
 
-        let _minted: Minted = events.remove(0);
+        let minted: Minted = events.remove(0);
 
+        let current_supply = token_vesting::get_total_supply(&minted);
+
+        assert!(current_supply == 4000,0);
         // debug::print(&minted);
 
         test_scenario::return_shared(treasury_cap);
@@ -236,8 +239,10 @@ fun test_withdraw_half() {
 
         let mut events = event::events_by_type<WithdrawVested>();
 
-        let _withdrawVested: WithdrawVested = vector::remove(&mut events, 0);
+        let withdrawVested: WithdrawVested = vector::remove(&mut events, 0);
 
+        let amount_withdrawn = token_vesting::get_amount_withdrawn(&withdrawVested);
+        assert!(amount_withdrawn == 100000,0);
         // debug::print(&withdrawVested);
 
 

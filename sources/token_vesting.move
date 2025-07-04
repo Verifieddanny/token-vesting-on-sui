@@ -131,6 +131,14 @@ public fun withdraw_vested(locker:&mut Locker, clock: &Clock, ctx: &mut TxContex
     event::emit(WithdrawVested { recipient: ctx.sender(), amount: available_vested_amount });
 }
 
+public fun get_total_supply(minted: &Minted): u64 {
+    minted.current_total_supply
+}
+
+public fun get_amount_withdrawn(withdrawVested: &WithdrawVested): u64 {
+     withdrawVested.amount
+}
+
 #[test_only]
 public fun test_init(ctx: &mut TxContext) {
     init(TOKEN_VESTING {}, ctx);
