@@ -277,7 +277,7 @@ fun test_withdraw_half_not_recipient() {
     };
     scenario.next_tx(deployer);
     {
-        /// expected to fail... since deployer has no Locker object
+// expected to fail... since deployer has no Locker object
         let mut locker = test_scenario::take_from_sender<Locker>(&scenario);
 
         let mut test_clock = clock::create_for_testing(scenario.ctx());
